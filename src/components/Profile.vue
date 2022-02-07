@@ -1,5 +1,6 @@
 <template>
   <form class="form-widget" @submit.prevent="updateProfile">
+    <Avatar v-model:path="avatar_url" @upload="updateProfile" />
     <div>
       <label for="email">Email</label>
       <input id="email" type="text" :value="store.user.email" disabled />
@@ -34,8 +35,13 @@
   import { supabase } from "../supabase"
   import { store } from "../store"
   import { onMounted, ref } from "vue"
+  import Avatar from './Avatar.vue'
 
   export default {
+    components: {
+      Avatar,
+    },
+
     setup() {
       const loading = ref(true)
       const username = ref("")
